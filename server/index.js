@@ -13,7 +13,8 @@ app.use(cors());
 
 //Routes
 app.use('/', (req,res) => res.send('API in /api/series'));
-app.use('/api/series', require('./routes/serie.route'))
+app.use('/api/series', require('./routes/series.route'));
+app.use('/api/categorias', require('./routes/categorias.route'))
 
 //Start the server
 app.listen(app.get('port'), () =>{

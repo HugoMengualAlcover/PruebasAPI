@@ -1,4 +1,4 @@
-const Serie = require("../remote/serie.model");
+const Serie = require("../models/serie.model");
 
 const serieCtrl = {};
 

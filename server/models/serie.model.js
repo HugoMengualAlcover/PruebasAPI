@@ -11,4 +11,4 @@ const serieSchema = new Schema({
     generos: [{type: String, required: true, default: null}]
 });
 
-module.exports = mongoose.model('Serie', serieSchema, 'serie');
+module.exports = mongoose.model('Serie', serieSchema, 'series');

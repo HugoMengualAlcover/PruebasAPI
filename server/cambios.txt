@@ -1,0 +1,5 @@
+index.ts cambiado: añadida la ruta de generos
+
+añadido el archivo categorias.route.js a routes
+añadido el archivo categorias.model a models
+añadido el archivo categorias.conreoller a controllers
