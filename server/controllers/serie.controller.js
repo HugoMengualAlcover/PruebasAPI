@@ -1,4 +1,4 @@
-const Serie = require("../remote/serie.model");
+const Serie = require('../models/serie.model');
 
 const serieCtrl = {};
 
@@ -6,20 +6,62 @@ serieCtrl.addSerie = async(req, res) => {
     const mySerie = new Serie(req.body);
     await mySerie.save()
         .then(() => {
-            res.json({message: 'Serie Succesfully Inserted'})
+            res.json({message:'Serie Succesfully Inserted'});
+        })
+        .catch(err => res.send(err.message));
+};
+
+serieCtrl.getSeries = async (req, res) => {
+    const series = await Serie.find()
+        .then((data
+        ) => res.json(data))
+        .catch((err) => console.log(err));
+};
+
+serieCtrl.getSerie = async (req, res) => {
+    const  serie = await Serie.findById(req.param.id)
+        .then((data
+        ) => {
+            if(data!=null) res.json(data)
+            else res.json({message: 'Serie doesnt exist'})
+        })
+        .catch(err => console.log(err))
+};
+
+serieCtrl.deleteSerie = async (req, res) =>{
+    await Serie.findByIdAndDelete(req.params.id)
+        .then((data) =>{
+            if (data!=null){
+                res.json(
+                    {message: 'La Serie ha sido eliminada'}
+                )
+            }else {
+                res.json({message: "La Serie no existe"})
+            }
         })
         .catch(err => res.send(err.message));
 }
 
-
-serieCtrl.getSeries = async (req, res) => {
-    const series = await Serie.find()
-        .then((data) => res.json(data))
-        .catch((err) => console.log(err));
+serieCtrl.updateSerie = async (req,res) => {
+    const serie = req.body;
+    await Serie.findByIdAndUpdate(
+        req.params.id,
+        {$set: serie},
+        {new:true}
+    )
+        .then((data) => {
+                if (data != null) res.json({message: "Serie Succesfully Updated", data})
+                else res.json({message: "Series doesn't exist"})
+            })
+        .catch(err => res.send(err.message));
 }
 
-serieCtrl.updateSerie = () => {};
-serieCtrl.addSerie();
-serieCtrl.getSeries()
-serieCtrl.getSerie = () => {};
-serieCtrl.getGenres = () =>{};
+serieCtrl.getCategorias = async (req, res) => {
+    await Serie.find().distinct('categorias')
+        .then((data) => res.json(data))
+        .catch((err) => console.error(err))
+}
+
+module.exports = serieCtrl;
+
+
