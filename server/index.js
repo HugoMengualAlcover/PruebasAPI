@@ -10,11 +10,14 @@ app.set('port', process.env.PORT || 3000);
 //Middleware
 app.use(morgan('dev'));
 app.use(cors());
+app.use(express.json());
 
 //Routes
-app.use('/', (req,res) => res.send('API in /api/series'));
 app.use('/api/series', require('./routes/series.route'));
-app.use('/api/categorias', require('./routes/categorias.route'))
+app.use('/api/categorias', require('./routes/categorias.route'));
+app.use('/', (req,res) => res.send('API in /api/series'));
+
+
 
 //Start the server
 app.listen(app.get('port'), () =>{

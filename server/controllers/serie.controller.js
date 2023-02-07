@@ -13,15 +13,13 @@ serieCtrl.addSerie = async(req, res) => {
 
 serieCtrl.getSeries = async (req, res) => {
     const series = await Serie.find()
-        .then((data
-        ) => res.json(data))
+        .then((data) => res.json(data))
         .catch((err) => console.log(err));
 };
 
 serieCtrl.getSerie = async (req, res) => {
-    const  serie = await Serie.findById(req.param.id)
-        .then((data
-        ) => {
+    const  serie = await Serie.findById(req.params.id)
+        .then((data) => {
             if(data!=null) res.json(data)
             else res.json({message: 'Serie doesnt exist'})
         })

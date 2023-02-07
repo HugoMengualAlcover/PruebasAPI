@@ -17,3 +17,14 @@ categoriaCtrl.getCategorias = async (req, res) => {
         .then((data) => res.json(data))
         .catch((err) => console.log(err));
 }
+
+categoriaCtrl.getCategoria = async (req, res) => {
+    const categoria = await Categoria.findById(req.params.id)
+.then((data) => {
+        if(data!=null) res.json(data)
+        else res.json({message: 'Categoria doesnt exist'})
+    })
+        .catch(err => console.log(err))
+}
+
+module.exports = categoriaCtrl;
