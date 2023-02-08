@@ -54,6 +54,16 @@ serieCtrl.updateSerie = async (req,res) => {
         .catch(err => res.send(err.message));
 }
 
+serieCtrl.getSerieCategoria = async (req, res) => {
+    const serie = await Serie.find({categorias: req.params.id})
+        .then ((data)=> {
+            if (data != null) res.json(data)
+            else res.json({message: "Serie doesn't exist"})
+        })
+        .catch(err => console.log(err))
+
+}
+
 module.exports = serieCtrl;
 
 
