@@ -13,10 +13,10 @@ app.use(cors());
 app.use(express.json());
 
 //Routes
-app.use('/api/series', require('./routes/series.route'));
 app.use('/api/categorias', require('./routes/categorias.route'));
+app.use('/api/series', require('./routes/series.route'));
 app.use('/', (req,res) => res.send('API in /api/series'));
-
+//Importante q este la ultima o siempre saldra el mensaje de la api esta en...
 
 
 //Start the server

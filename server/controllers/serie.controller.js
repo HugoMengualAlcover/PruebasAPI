@@ -54,12 +54,6 @@ serieCtrl.updateSerie = async (req,res) => {
         .catch(err => res.send(err.message));
 }
 
-serieCtrl.getCategorias = async (req, res) => {
-    await Serie.find().distinct('categorias')
-        .then((data) => res.json(data))
-        .catch((err) => console.error(err))
-}
-
 module.exports = serieCtrl;
 
 
