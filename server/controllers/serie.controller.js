@@ -6,7 +6,7 @@ serieCtrl.addSerie = async(req, res) => {
     const mySerie = new Serie(req.body);
     await mySerie.save()
         .then(() => {
-            res.json({message:'Serie Succesfully Inserted'});
+            res.json({message:'Interfaces Succesfully Inserted'});
         })
         .catch(err => res.send(err.message));
 };
@@ -21,7 +21,7 @@ serieCtrl.getSerie = async (req, res) => {
     const  serie = await Serie.findById(req.params.id)
         .then((data) => {
             if(data!=null) res.json(data)
-            else res.json({message: 'Serie doesnt exist'})
+            else res.json({message: 'Interfaces doesnt exist'})
         })
         .catch(err => console.log(err))
 };
@@ -31,10 +31,10 @@ serieCtrl.deleteSerie = async (req, res) =>{
         .then((data) =>{
             if (data!=null){
                 res.json(
-                    {message: 'La Serie ha sido eliminada'}
+                    {message: 'La Interfaces ha sido eliminada'}
                 )
             }else {
-                res.json({message: "La Serie no existe"})
+                res.json({message: "La Interfaces no existe"})
             }
         })
         .catch(err => res.send(err.message));
@@ -48,7 +48,7 @@ serieCtrl.updateSerie = async (req,res) => {
         {new:true}
     )
         .then((data) => {
-                if (data != null) res.json({message: "Serie Succesfully Updated", data})
+                if (data != null) res.json({message: "Interfaces Succesfully Updated", data})
                 else res.json({message: "Series doesn't exist"})
             })
         .catch(err => res.send(err.message));
@@ -58,7 +58,7 @@ serieCtrl.getSerieCategoria = async (req, res) => {
     const serie = await Serie.find({categorias: req.params.id})
         .then ((data)=> {
             if (data != null) res.json(data)
-            else res.json({message: "Serie doesn't exist"})
+            else res.json({message: "Interfaces doesn't exist"})
         })
         .catch(err => console.log(err))
 
