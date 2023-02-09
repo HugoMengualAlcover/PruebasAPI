@@ -1,0 +1,173 @@
+<div class="container-fluid">
+
+  <div class="w-100 d-flex">
+    <h3 class="mt-2 d-inline-block me-auto">{{series.length}}
+      películas</h3>
+    <h3 class="d-inline-block ms-auto pointer"
+        (click)="addSerie()"
+        data-bs-toggle="modal"
+        data-bs-target="#miModal"> Add serie
+      <i class="fas fa-plus-circle pointer"></i></h3>
+  </div>
+
+  <div class="container" *ngFor="let serie of series">
+    <div class="row border rounded">
+      <div class="col-md-11">
+        <div (click)="loadSerie(serie)" data-bs-toggle="modal"
+             data-bs-target="#miModal" class="row mt-3 pt-2">
+          <div class="col-md-2">
+            <img class="imgCard" src="{{serie.url[0] || 'assets/images/no-image-icon.jpg'}}" alt="{{serie.nombre}}">
+          </div>
+          <div class="col-md-9">
+            <h5>{{serie.nombre}}</h5>
+            <small class="text-danger">{{serie.categorias}}</small>
+            <p><b>Year</b>: {{serie.year}}</p>
+            <small>{{serie.sinopsis}}</small>
+          </div>
+          <div class="pb-2"></div>
+        </div>
+
+        <div class="row">
+          <div class="col" *ngFor="let p of serie.puntuacion">
+            <p><b>Email:</b>: {{p.email}}</p>
+            <p><b>Puntuación:</b>: {{p.puntuacion}}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-1 remove d-flex">
+        <h3 class="ms-auto align-self-center">
+          <i (click)="removeSerie(serie)"
+             class="fas fa-times"></i></h3>
+      </div>
+    </div>
+
+    <div class="mb-2"></div>
+  </div>
+  <!-- Fin del NgFor -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="miModal"
+       tabindex="-1" aria-labelledby="miModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="miModalLabel">
+            {{editar ? nombre : 'New Serie'}}</h5>
+          <button type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+
+        </div>
+        <form [formGroup]="formSerie" (ngSubmit)="onSubmit()">
+          <div class="modal-body">
+            <div class="form-floating mb-3">
+              <input formControlName="nombre"
+                     type="text" class="form-control"
+                     id="nombre" value="{{nombre}}"
+                     placeholder="Nombre">
+              <label for="nombre">Nombre</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input formControlName="year"
+                     type="number" class="form-control"
+                     id="year" value="{{year}}"
+                     placeholder="Year">
+              <label for="year">Year</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input formControlName="numeroCapitulos"
+                     type="text" class="form-control"
+                     id="numeroCapitulos"
+                     value="{{numeroCapitulos}}"
+                     placeholder="Numero de Capitulos">
+              <label for="numeroCapitulos">Numero de Capitulos</label>
+            </div>
+            <div class="row">
+              <div class="col-8">
+                <div class="form-floating mb-3" *ngFor="let u of url">
+                  <input formControlName="url"
+                         type="text" class="form-control"
+                         id="url"
+                         value="{{u}}"
+                         placeholder="URL">
+                  <label for="url">URL</label>
+                </div>
+
+              </div>
+              <div class="col-4">
+                <img *ngFor="let u of url" class="imgModal" src="{{u}}" alt="...">
+              </div>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+              <textarea formControlName="sinopsis"
+                        rows="7"
+                        class="form-control"
+                        id="sinopsis" value="{{sinopsis}}">
+              </textarea>
+              <label for="sinopsis">Sinopsis</label>
+            </div>
+
+            <!-- select genres -->
+            <!--
+            <div *ngIf="editar">
+              <label for="Select">Categorias</label>
+              <select class="form-select" id="Select"
+                      aria-label="Categorias" multiple
+                      formControlName="genres">
+                <option *ngFor="let cat of formSerie.getRawValue().categorias"
+                        [value]="cat">{{cat}}</option>
+              </select>
+            </div>
+            <div *ngIf="!editar">
+              <label for="newSelect">Categorias</label>
+              <select class="form-select" id="newSelect"
+                      aria-label="Categorias" multiple
+                      formControlName="genres">
+                <option *ngFor="let cat of categorias" [value]="cat">
+                  {{cat}}</option>
+              </select>
+            </div>
+            -->
+
+
+            <fieldset formGroupName="email">
+              <legend>Puntuacion</legend>
+              <div *ngFor="let n of arrayFori">
+                <p>Email: {{puntuacionArray[n].email}}</p>
+                <p>Puntuacion: {{puntuacionArray[n].puntuacion}}</p>
+              </div>
+              <div class="form-floating mb-3">
+                <input formControlName="email"
+                       type="email" class="form-control"
+                       id="email"
+                       value="{{email}}"
+                       placeholder="Email">
+                <label for="email">Email</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input formControlName="puntuacion"
+                       type="number" class="form-control"
+                       id="puntuacion"
+                       value="{{puntuacionNumber}}"
+                       placeholder="Puntuacion">
+                <label for="puntuacion">Votes</label>
+              </div>
+            </fieldset>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary"
+                      data-bs-dismiss="modal">Close
+              </button>
+              <button type="submit" class="btn btn-primary"
+                      data-bs-dismiss="modal">Save changes
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
