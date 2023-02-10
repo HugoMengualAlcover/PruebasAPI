@@ -26,9 +26,6 @@ export class SeriesListComponent implements OnInit{
     categorias: []
   })
 
-  arrayFori: number[] = []; //Con este array puedo evitar entrar a la primera puntuacion, la cual realmente no representa nada
-  indiceInicial: number = 1;
-
   myNewSerie = new FormGroup({
     newSerie: new FormControl('')
   })
@@ -41,10 +38,6 @@ export class SeriesListComponent implements OnInit{
               private formBuilder: FormBuilder) {  }
 
   ngOnInit(): void {
-    for (let i = 0; i < this.series.length; i++) {
-      this.arrayFori.push(this.indiceInicial);
-      this.indiceInicial++;
-    }
     this.listSeries();
   }
 
@@ -115,7 +108,7 @@ export class SeriesListComponent implements OnInit{
     return this.formSerie.get('sinopsis')?.value;
   }
   get puntuacionArray(): Puntuacion[]{
-    console.log(this.formSerie.getRawValue().puntuacion.length)
+    console.log(this.formSerie.getRawValue().puntuacion.length);
     return this.formSerie.get('puntuacion')?.value;
   }
 

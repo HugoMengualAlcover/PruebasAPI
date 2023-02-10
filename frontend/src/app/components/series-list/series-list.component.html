@@ -132,31 +132,6 @@
             </div>
             -->
 
-
-            <fieldset formGroupName="email">
-              <legend>Puntuacion</legend>
-              <div *ngFor="let n of arrayFori">
-                <p>Email: {{puntuacionArray[n].email}}</p>
-                <p>Puntuacion: {{puntuacionArray[n].puntuacion}}</p>
-              </div>
-              <div class="form-floating mb-3">
-                <input formControlName="email"
-                       type="email" class="form-control"
-                       id="email"
-                       value="{{email}}"
-                       placeholder="Email">
-                <label for="email">Email</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input formControlName="puntuacion"
-                       type="number" class="form-control"
-                       id="puntuacion"
-                       value="{{puntuacionNumber}}"
-                       placeholder="Puntuacion">
-                <label for="puntuacion">Votes</label>
-              </div>
-            </fieldset>
-
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary"
                       data-bs-dismiss="modal">Close
