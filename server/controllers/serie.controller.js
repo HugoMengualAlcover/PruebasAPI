@@ -42,6 +42,7 @@ serieCtrl.deleteSerie = async (req, res) =>{
 
 serieCtrl.updateSerie = async (req,res) => {
     const serie = req.body;
+    console.log(serie);
     await Serie.findByIdAndUpdate(
         req.params.id,
         {$set: serie},

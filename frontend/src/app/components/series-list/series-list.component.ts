@@ -13,7 +13,7 @@ export class SeriesListComponent implements OnInit{
   series: Serie[] = [];
 
   formSerie: FormGroup = this.formBuilder.group({
-    _id: '',
+    _id: [''],
     nombre: '',
     url: [],
     numeroCapitulos: 0,
@@ -30,15 +30,16 @@ export class SeriesListComponent implements OnInit{
     newSerie: new FormControl('')
   })
 
-  editar = false;
+  editar: boolean = false;
 
   categoriasList: Categoria[] = []
 
   constructor(private serieService: SerieService,
-              private formBuilder: FormBuilder) {  }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.listSeries();
+    this.editar = false;
   }
 
   private listSeries() {
@@ -50,8 +51,10 @@ export class SeriesListComponent implements OnInit{
   }
 
   onSubmit(){
+    console.log(this.editar)
     if (this.editar) {
-      const id = this.formSerie.getRawValue()._id;
+      const id = this.formSerie.getRawValue()._id
+      console.log(id)
       const serie = this.formSerie.getRawValue();
       this.serieService.updateSerie(id,
         serie).subscribe(
@@ -70,8 +73,8 @@ export class SeriesListComponent implements OnInit{
   }
 
   loadSerie(serie: Serie) {
-    this.formSerie.setValue(serie);
     this.editar = true;
+    this.formSerie.setValue(serie);
   }
 
   addSerie() {
@@ -109,7 +112,7 @@ export class SeriesListComponent implements OnInit{
     return this.formSerie.get('sinopsis')?.value;
   }
   get puntuacionArray(): Puntuacion[]{
-    console.log(this.formSerie.getRawValue().puntuacion.length);
+    //console.log(this.formSerie.getRawValue().puntuacion.length);
     return this.formSerie.get('puntuacion')?.value;
   }
 

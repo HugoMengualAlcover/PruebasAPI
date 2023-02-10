@@ -17,7 +17,7 @@ export class SerieService {
   }
 
   updateSerie(id: string, serie: Serie): Observable<any> {
-    return this.http.put(this.baseURL+'update/'+id,serie);
+    return this.http.put(`http://localhost:3000/api/series/update/'+${id}`,serie);
   }
 
   newSerie(serie: Serie): Observable<any> {
