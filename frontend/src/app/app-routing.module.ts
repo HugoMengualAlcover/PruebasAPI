@@ -5,8 +5,7 @@ import {SeriesListComponent} from "./components/series-list/series-list.componen
 const routes: Routes = [
   {path: '', pathMatch: 'full', component: SeriesListComponent},
   {path: 'series', redirectTo: ''},
-  {path: '**', redirectTo: '/series', pathMatch: 'full'},
-  //{path: 'categorias', pathMatch: 'full', component: }
+  {path: '**', redirectTo: '/series', pathMatch: 'full'}
 ];
 
 @NgModule({
