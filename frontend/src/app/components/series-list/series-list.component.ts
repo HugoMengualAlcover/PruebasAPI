@@ -52,8 +52,9 @@ export class SeriesListComponent implements OnInit{
   onSubmit(){
     if (this.editar) {
       const id = this.formSerie.getRawValue()._id;
+      const serie = this.formSerie.getRawValue();
       this.serieService.updateSerie(id,
-        this.formSerie.getRawValue()).subscribe(
+        serie).subscribe(
         (data: any) => {
           this.listSeries();
         }

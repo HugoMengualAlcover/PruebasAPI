@@ -7,7 +7,7 @@ router.get('/',seriesCtrl.getSeries);
 router.get('/serie/:id', seriesCtrl.getSerie);
 router.put('/update/:id',seriesCtrl.updateSerie);
 router.post('/', seriesCtrl.addSerie);
-router.delete('/dlete/:id', seriesCtrl.deleteSerie);
+router.delete('/delete/:id', seriesCtrl.deleteSerie);
 router.get('/categoria/:id', seriesCtrl.getSerieCategoria)
 
 module.exports = router;
