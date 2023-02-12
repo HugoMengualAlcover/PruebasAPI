@@ -5,8 +5,9 @@ export interface Serie{
   numeroCapitulos: number,
   year: number,
   sinopsis: string,
-  puntuacion: Puntuacion[]
+  puntuacion: Puntuacion[],
   categorias: string[],
+  __v: number
 }
 
 export interface Puntuacion{

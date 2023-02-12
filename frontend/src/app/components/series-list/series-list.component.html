@@ -1,9 +1,9 @@
 <div class="container-fluid">
 
   <div class="w-100 d-flex">
-    <h3 class="mt-2 d-inline-block me-auto">{{series.length}}
+    <h3 class="mt-2 d-inline-block me-auto txtColor">{{series.length}}
       películas</h3>
-    <h3 class="d-inline-block ms-auto pointer"
+    <h3 class="d-inline-block ms-auto pointer txtColor"
         (click)="addSerie()"
         data-bs-toggle="modal"
         data-bs-target="#miModal"> Add serie
@@ -19,20 +19,21 @@
             <img class="imgCard" src="{{serie.url[0]}}" alt="{{serie.nombre}}">
           </div>
           <div class="col-md-9">
-            <h5>{{serie.nombre}}</h5>
-            <small class="text-danger">{{nomCategoria(serie.categorias)}}</small>
-            <p><b>Year</b>: {{serie.year}}</p>
-            <small>{{serie.sinopsis}}</small>
+            <h5 class="text-danger">{{serie.nombre}}</h5>
+            <p class="text-warning"> {{nomCategoria(serie.categorias)}}</p>
+            <p class="txtColor">Numero Capitulos: {{serie.numeroCapitulos}}</p>
+            <p class="txtColor">Año de Emision: {{serie.year}}</p>
+            <p class="txtColor">{{serie.sinopsis}}</p>
           </div>
           <div class="pb-2"></div>
         </div>
 
       </div>
 
-      <div class="col-md-1 remove d-flex">
+      <div class="col-md-1 remove d-flex txtColor">
         <h3 class="ms-auto align-self-center">
           <i (click)="removeSerie(serie)"
-             class="fas fa-times"></i></h3>
+             class="fas fa-trash"></i></h3>
       </div>
     </div>
 
@@ -47,7 +48,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="miModalLabel">
+          <h5 class="modal-title txtColor" id="miModalLabel">
             {{editar ? nombre : 'New Serie'}}</h5>
           <button type="button"
                   class="btn-close"
@@ -59,61 +60,62 @@
           <div class="modal-body">
             <div class="form-floating mb-3">
               <input formControlName="nombre"
-                     type="text" class="form-control"
+                     type="text" class="form-control txtColor"
                      id="nombre" value="{{nombre}}"
                      placeholder="Nombre">
-              <label for="nombre">Nombre</label>
+              <label for="nombre" class="txtColor">Nombre</label>
             </div>
             <div class="form-floating mb-3">
               <input formControlName="year"
-                     type="number" class="form-control"
+                     type="number" class="form-control txtColor"
                      id="year" value="{{year}}"
                      placeholder="Year">
-              <label for="year">Year</label>
+              <label for="year" class="txtColor">Year</label>
             </div>
             <div class="form-floating mb-3">
               <input formControlName="numeroCapitulos"
-                     type="text" class="form-control"
+                     type="text" class="form-control txtColor"
                      id="numeroCapitulos"
                      value="{{numeroCapitulos}}"
                      placeholder="Numero de Capitulos">
-              <label for="numeroCapitulos">Numero de Capitulos</label>
+              <label for="numeroCapitulos" class="txtColor">Numero de Capitulos</label>
             </div>
             <div class="row">
               <div class="col-8">
                 <div class="form-floating mb-3">
                   <input formControlName="url"
-                         type="text" class="form-control"
+                         type="text" class="form-control txtColor"
                          id="url"
                          value="{{url}}"
                          placeholder="URL">
-                  <label for="url">URL</label>
+                  <label for="url" class="txtColor">URL</label>
                 </div>
 
               </div>
-              <div class="col-4">
+              <div>
                 <img *ngFor="let u of url" class="imgModal" src="{{u}}" alt="...">
               </div>
             </div>
             <div class="form-floating mb-3 mt-3">
               <textarea formControlName="sinopsis"
                         rows="7"
-                        class="form-control"
+                        class="form-control txtColor"
                         id="sinopsis" value="{{sinopsis}}">
               </textarea>
-              <label for="sinopsis">Sinopsis</label>
+              <label for="sinopsis" class="txtColor">Sinopsis</label>
             </div>
 
             <!-- select genres -->
             <div>
               <label for="Select">Categorias</label>
-              <select class="form-select" id="Select"
-                      aria-label="Categorias" multiple
+              <select class="form-select" multiple id="Select"
+                      aria-label="Categorias"
                       formControlName="categorias">
-                <option *ngFor="let cat of categoriasList" [value]="cat">
+                <option *ngFor="let cat of categoriasList" [value]="cat._id"  class="txtColor">
                   {{cat.nombre}}</option>
               </select>
             </div>
+
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary"

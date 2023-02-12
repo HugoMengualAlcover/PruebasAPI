@@ -16,9 +16,23 @@
 }
 
 .imgModal{
-  width: 50px;
+  max-width: 200px;
+  max-height: 200px;
+  margin: 5px;
 }
 
 textarea{
   min-height: 100px;
+}
+
+form{
+  background: #1e2125;
+}
+
+.form-control, .form-select, .modal-header{
+  background: darkslategrey;
+}
+
+.txtColor{
+  color: #f6f3e9;
 }

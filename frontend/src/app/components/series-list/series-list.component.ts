@@ -106,12 +106,7 @@ export class SeriesListComponent implements OnInit{
     for (let i = 0; i < cat.length; i++) {
       for (let j = 0; j < this.categoriasList.length; j++) {
         if (cat[i] == this.categoriasList[j]._id){
-          console.log(cat[i] == this.categoriasList[j]._id)
-          console.log(i+"    "+j)
-          console.log("Scat: "+cat[i])
-          console.log("catID: "+this.categoriasList[j]._id)
-          console.log("catNombre: "+this.categoriasList[j].nombre)
-          nomCats.concat(this.categoriasList[j].nombre)
+          nomCats = nomCats+(this.categoriasList[j].nombre)+" "
         }
       }
     }
