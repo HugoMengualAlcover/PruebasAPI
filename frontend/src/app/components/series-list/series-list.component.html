@@ -16,11 +16,11 @@
         <div (click)="loadSerie(serie)" data-bs-toggle="modal"
              data-bs-target="#miModal" class="row mt-3 pt-2">
           <div class="col-md-2">
-            <img class="imgCard" src="{{serie.url[0] || 'assets/images/no-image-icon.jpg'}}" alt="{{serie.nombre}}">
+            <img class="imgCard" src="{{serie.url[0]}}" alt="{{serie.nombre}}">
           </div>
           <div class="col-md-9">
             <h5>{{serie.nombre}}</h5>
-            <small class="text-danger">{{serie.categorias}}</small>
+            <small class="text-danger">{{nomCategoria(serie.categorias)}}</small>
             <p><b>Year</b>: {{serie.year}}</p>
             <small>{{serie.sinopsis}}</small>
           </div>
@@ -105,26 +105,15 @@
             </div>
 
             <!-- select genres -->
-            <!--
-            <div *ngIf="editar">
+            <div>
               <label for="Select">Categorias</label>
               <select class="form-select" id="Select"
                       aria-label="Categorias" multiple
-                      formControlName="genres">
-                <option *ngFor="let cat of formSerie.getRawValue().categorias"
-                        [value]="cat">{{cat}}</option>
+                      formControlName="categorias">
+                <option *ngFor="let cat of categoriasList" [value]="cat">
+                  {{cat.nombre}}</option>
               </select>
             </div>
-            <div *ngIf="!editar">
-              <label for="newSelect">Categorias</label>
-              <select class="form-select" id="newSelect"
-                      aria-label="Categorias" multiple
-                      formControlName="genres">
-                <option *ngFor="let cat of categorias" [value]="cat">
-                  {{cat}}</option>
-              </select>
-            </div>
-            -->
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary"

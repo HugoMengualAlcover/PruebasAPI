@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Categoria, Puntuacion, Serie} from "../../common/interfaces";
-import {SerieService} from "../../services/serie.service";
+import {DataService} from "../../services/data-service";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
 @Component({
@@ -34,11 +34,12 @@ export class SeriesListComponent implements OnInit{
 
   categoriasList: Categoria[] = []
 
-  constructor(private serieService: SerieService,
+  constructor(private serieService: DataService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.listSeries();
+    this.cargarCategorias();
     this.editar = false;
   }
 
@@ -50,8 +51,15 @@ export class SeriesListComponent implements OnInit{
     )
   }
 
+  private cargarCategorias(){
+    this.serieService.getCategorias().subscribe(
+      (data: Categoria[]) => {
+        this.categoriasList = data;
+      }
+    )
+  }
+
   onSubmit(){
-    console.log(this.editar)
     if (this.editar) {
       const id = this.formSerie.getRawValue()._id
       console.log(id)
@@ -78,8 +86,8 @@ export class SeriesListComponent implements OnInit{
   }
 
   addSerie() {
-    this.formSerie.reset();
     this.editar = false;
+    this.formSerie.reset();
   }
 
   removeSerie(serie: Serie) {
@@ -91,6 +99,23 @@ export class SeriesListComponent implements OnInit{
         }
       );
     }
+  }
+
+  nomCategoria(cat: string[]){
+    var nomCats: string = "";
+    for (let i = 0; i < cat.length; i++) {
+      for (let j = 0; j < this.categoriasList.length; j++) {
+        if (cat[i] == this.categoriasList[j]._id){
+          console.log(cat[i] == this.categoriasList[j]._id)
+          console.log(i+"    "+j)
+          console.log("Scat: "+cat[i])
+          console.log("catID: "+this.categoriasList[j]._id)
+          console.log("catNombre: "+this.categoriasList[j].nombre)
+          nomCats.concat(this.categoriasList[j].nombre)
+        }
+      }
+    }
+    return nomCats
   }
 
   get nombre(): any {
@@ -111,19 +136,5 @@ export class SeriesListComponent implements OnInit{
   get sinopsis(): any {
     return this.formSerie.get('sinopsis')?.value;
   }
-  get puntuacionArray(): Puntuacion[]{
-    //console.log(this.formSerie.getRawValue().puntuacion.length);
-    return this.formSerie.get('puntuacion')?.value;
-  }
 
-  get puntuacionNumber(): any {
-    return this.formSerie.get('puntuacion.puntuacion')?.value;
-  }
-
-  get email(): any {
-    return this.formSerie.get('puntuacion.email')?.value;
-  }
-  get newSerie(): any {
-    return this.formSerie.get('newSerie')?.value;
-  }
 }
